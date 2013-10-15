@@ -221,10 +221,10 @@ var GameBoard = function() {
 	//}
 	//return false;
 	var args = Array.prototype.slice.call(arguments,1);
-	
-		var detecte = _.filter(this.objects, function(obj){return obj.apply(obj,args)}); //Modificamos
-		if (detecte.length > 0)return detect[0];
-		return false;    
+		// creo que es con find: lo que hace es devolver directamente el primer elemento de objects
+		// que cumple la condicion. Pero no soy capaz de hacer pasar el test. 
+		var detecte = _.find(this.objects, function(obj){return func(obj)}); //Modificamos
+		return detecte;
 	};
 
     // Cuando Game.loop() llame a step(), hay que llamar al método
