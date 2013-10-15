@@ -220,9 +220,11 @@ var GameBoard = function() {
 	 //   if(func.call(this.objects[i])) return this.objects[i];
 	//}
 	//return false;
-	var detecte = _.filter(this.objects, function(){});
-	if (detecte.length > 0)return detect[0];
-	return false;    
+	var args = Array.prototype.slice.call(arguments,1);
+	
+		var detecte = _.filter(this.objects, function(obj){return obj.apply(obj,args)}); //Modificamos
+		if (detecte.length > 0)return detect[0];
+		return false;    
 	};
 
     // Cuando Game.loop() llame a step(), hay que llamar al método
