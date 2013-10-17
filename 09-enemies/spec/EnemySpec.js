@@ -61,3 +61,64 @@
 
 */
 
+describe("Clase Enemy", function() {
+
+        var canvas, ctx;
+
+        beforeEach(function(){
+                loadFixtures('index.html');
+
+                canvas = $('#game')[0];
+                expect(canvas).toExist();
+
+                ctx = canvas.getContext('2d');
+                expect(ctx).toBeDefined();
+        });
+it("step", function() {
+                var objeto = {
+                   basic: { x: 100, y: -50, sprite: 'enemy_purple', A: 0, F: 0 , E: 100 }
+                };
+                SpriteSheet = {
+                        map : {enemy_purple: { sx: 37, sy: 0, w: 42, h: 43, frames: 1 }}
+                };
+                var dummy = {
+                        remove: function(obj) {}
+                };
+                
+                var objeto2 = new Enemy(objeto.basic);
+                objeto2.board = dummy;
+                spyOn(dummy, "remove");
+        
+
+                
+                //saliendose de la pantalla
+                objeto2.step(100000);
+                expect(dummy.remove).toHaveBeenCalledWith(objeto2);
+        });
+        
+        it("draw", function() {
+                var objeto = {
+                   basic: { x: 100, y: -50, sprite: 'enemy_purple', A: 0, F: 0 , E: 100 }
+                };
+                
+                SpriteSheet = {
+                        map : {enemy_purple: { sx: 37, sy: 0, w: 42, h: 43, frames: 1 }},
+                        draw: function() {}
+                };
+                var objeto2 = new Enemy(objeto.basic);
+                spyOn(SpriteSheet, "draw");
+                objeto2.draw(ctx);
+                expect(SpriteSheet.draw).toHaveBeenCalled();
+                expect(SpriteSheet.draw.calls[0].args[1]).toEqual("enemy_purple");
+                expect(SpriteSheet.draw.calls[0].args[2]).toEqual(objeto2.x);
+                expect(SpriteSheet.draw.calls[0].args[3]).toEqual(objeto2.y);
+        });
+
+});
+
+
+
+
+
+
+
