@@ -67,11 +67,13 @@ describe("objeto FireBall",function(){
 		var miboard = new GameBoard();
 		var miFireBallD = new FireBallD (10,10);
 		miboard.add (miFireBallD); // aadimos miFireBallI a board para que miMissile pueda referenciar a board.
-		spyOn(miboard, "collide");
+		spyOn(miboard, "remove");
 		var dt = 1;
 		miFireBallD.step(dt);
 		runs(function(){
-			expect (miboard.collide).toHaveBeenCalled(); // se debera haber llamado a remove
+			expect (miboard.remove).toHaveBeenCalled(); // se debera haber llamado a remove
+			expect (miboard.remove.calls[0].args[0]).toBe (miFireBallD); // me aseguro del correcto paso de parmetros.
+			expect (miboard.remove.length).toBe(0); // aunque se halla intentado aadir a removed no se puede puesto que no existe.
 		});
 		
 	});
