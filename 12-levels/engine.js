@@ -32,7 +32,7 @@ var Game = new function() {
     };
 
     // Gestión de la entrada (teclas para izda/derecha y disparo)
-    var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' };
+    var KEY_CODES = { 37:'left', 39:'right', 32 :'fire',66:'fballi',78:'fballd' };
     this.keys = {};
 
     this.setupInput = function() {
@@ -389,8 +389,8 @@ Level.prototype.step = function(dt) {
     // ventana de tiempo en la que hay que crear enemigos de dicha
     // batería
     for(var i=0,len=remove.length;i<len;i++) {
-	var remIdx = this.levelData.indexOf(remove[i]);
-	if(remIdx != -1) this.levelData.splice(remIdx,1);
+		var remIdx = this.levelData.indexOf(remove[i]);
+		if(remIdx != -1) this.levelData.splice(remIdx,1);
     }
 
     // Comprueba si hay que terminar el nivel porque no quedan más
