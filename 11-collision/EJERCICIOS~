@@ -92,7 +92,7 @@ EJERCICIOS
        colisión se informe del daño ocasionado al objeto alcanzado.
 
        Cuando un objeto colisione con un sprite se llamará al método
-       hit() del sprite. Para ello se añade en engine.js el método
+       hit() del sprite. Para ello se añade en sprite.js el método
        Sprite.prototype.hit(). Recibe como argumento el daño
        ocasionado, que es en este prototipo una nueva propiedad de los
        misiles.  El comportamiento por defecto de un sprite cuando es
