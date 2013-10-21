@@ -212,7 +212,7 @@ FireBallI.prototype.step = function(dt)  {
 	this.vy = -1500;
 	this.vx = -500;
  	//if (dt > 3000) {i = -1;}
-	this.y += this.vy * Math.pow(dt,2) + dt - 5; //-(i * 3);//this.y += this.vy * dt;//v0sen(teta)dt  y   v0sen(teta)dt - 1/2dt²
+	this.y += this.vy * Math.pow(dt,2) + dt - 15; //-(i * 3);//this.y += this.vy * dt;//v0sen(teta)dt  y   v0sen(teta)dt - 1/2dt²
     this.x += this.vx * dt;
 
 	if(this.y < -this.h) { this.board.remove(this); }
@@ -236,7 +236,7 @@ FireBallD.prototype.step = function(dt)  {
 	this.vy = -1500;
 	this.vx = 500;
    
-	this.y += this.vy * Math.pow(dt,2) + dt - 5; //this.y += this.vy * dt;//v0sen(teta)dt  y   v0sen(teta)dt - 1/2dt²
+	this.y += this.vy * Math.pow(dt,2) + dt - 15; //this.y += this.vy * dt;//v0sen(teta)dt  y   v0sen(teta)dt - 1/2dt²
     this.x += this.vx * dt;
  
 	if(this.y < -this.h) { this.board.remove(this); }

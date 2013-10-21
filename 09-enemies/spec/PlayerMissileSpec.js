@@ -42,7 +42,7 @@ describe ("Clase PlayerMissile", function(){
 		expect (PlayerMissile).toBeDefined(); // me aseguro de que PlayerMissile ha sido definido
     });
     
-	it ("PlayerMissile.draw",function(){
+	it ("PlayerMissileI.draw",function(){
 		SpriteSheet = { // creamos un objeto dummy SpriteSheet y que en su map tiene almacenado un sprite missile.
   			map : {missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }},
   			draw: function() {}
