@@ -1,7 +1,8 @@
 var sprites = {
     ship: { sx: 0, sy: 0, w: 37, h: 42, frames: 1 },
     missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 },
-    enemy_purple: { sx: 37, sy: 0, w: 42, h: 43, frames: 1 }
+    enemy_purple: { sx: 37, sy: 0, w: 42, h: 43, frames: 1 },
+	fire_ball: {sx: 0, sy: 64, w: 64, h: 64, frames: 12}	
 };
 
 var enemies = {
@@ -141,6 +142,20 @@ var PlayerShip = function() {
 	    this.board.add(new PlayerMissile(this.x,this.y+this.h/2));
 	    this.board.add(new PlayerMissile(this.x+this.w,this.y+this.h/2));
 	}
+	if (Game.keys['fballi'] && this.reload < 0){
+		Game.keys['fballi'] = false;
+		this.reload = this.reloadTime;
+		//Añadimos el FireballI y el FireBalld
+		this.board.add(new FireBallI(this.x,this.y+this.h/2));
+		//this.board.add(new FireBallD(this.x+this.w,this.y+this.h/2));
+	}
+	if (Game.keys['fballd'] && this.reload < 0){
+		Game.keys['fballd'] = false;
+		this.reload = this.reloadTime;
+		//Añadimos el FireballI y el FireBalld
+		//this.board.add(new FireBallI(this.x,this.y+this.h/2));
+		this.board.add(new FireBallD(this.x+this.w,this.y+this.h/2));
+	}
     }
 }
 
@@ -166,9 +181,39 @@ PlayerMissile.prototype.step = function(dt)  {
     this.y += this.vy * dt;
     if(this.y < -this.h) { this.board.remove(this); }
 };
+//------------------FIREBALLI---------------------
+var FireBallI = function(x,y) {
+	this.setup('fire_ball', {vy: -1500, vx: -500});
+	this.x = x - this.w/2;
+    this.y = y - this.h; 
+};
+	
+FireBallI.prototype = new Sprite();
 
+FireBallI.prototype.step = function(dt) {
+	this.y += this.vy * Math.pow(dt,2) + dt - 15; //this.y += this.vy * dt;//v0sen(teta)dt  y   v0sen(teta)dt - 1/2dt²
+    this.x += this.vx * dt;
 
+	if(this.y < -this.h) { this.board.remove(this); }
+	if(this.x < -this.w) { this.board.remove(this); } 
+};
 
+//------------------FIREBALLD-----------------------
+var FireBallD = function(x,y) {
+	this.setup('fire_ball', {vy: -1500, vx: 500});
+	this.x = x - this.w/2;
+    this.y = y - this.h; 
+};
+	
+FireBallD.prototype = new Sprite();
+
+FireBallD.prototype.step = function(dt) {
+	this.y += this.vy * Math.pow(dt,2) + dt - 15; //this.y += this.vy * dt;//v0sen(teta)dt  y   v0sen(teta)dt - 1/2dt²
+    this.x += this.vx * dt;
+
+	if(this.y < -this.h) { this.board.remove(this); }
+	if(this.x < -this.w) { this.board.remove(this); } 
+};
 // Constructor para las naves enemigas. Un enemigo se define mediante
 // un conjunto de propiedades provenientes de 3 sitios distintos, que
 // se aplican  este orden:
