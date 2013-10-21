@@ -10,6 +10,7 @@ var canvas, ctx;
 
                 ctx = canvas.getContext('2d');
                 expect(ctx).toBeDefined();
+                
         });
 
 
@@ -22,7 +23,36 @@ var canvas, ctx;
          expect(board['c1']).toBe('2');
          expect(board['c2']).toBe('4');
 
-	};
+	});
+	
+	it("Sprite.setup", function(){
 
+		var board = new Sprite();
+		var sprites = {
+			fire_ball: {sx: 0, sy: 64, w: 64, h: 64, frames: 12}	
+		};
+		var props = {y:1,x:1};
+		spyOn(board, "setup");
+		board.setup("fire_ball",props);
+		expect(board.setup).toHaveBeenCalledWith("fire_ball",props);
 
-};
+	});
+	
+	it("Sprite.draw", function(){
+		var board = new Sprite();
+		
+		SpriteSheet = {
+			map: {fire_ball: {sx: 0, sy: 64, w: 64, h: 64, frames: 12}},
+			draw: function(){}
+		};
+		
+		spyOn(SpriteSheet, "draw");
+		board.setup("fire_ball",{y:1,x:1});
+		board.draw(ctx);
+		
+			
+	});
+	
+	
+
+});
